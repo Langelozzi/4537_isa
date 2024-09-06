@@ -1,0 +1,5 @@
+const MS_PER_SECOND = 1000;
+const HEX_LETTERS = '0123456789ABCDEF';
+const HEX_LENGTH = 6;
+const HEX_BASE = 16;
+const DECIMAL_BASE = 10;
