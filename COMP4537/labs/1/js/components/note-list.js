@@ -29,6 +29,10 @@ class NoteList {
         this.notes.splice(index, 1);
     }
 
+    toJSON() {
+        return this.notes.map(note => note.toJSON());
+    }
+
     // Private methods
     _createNoteListElement() {
         const template = document.getElementById(this._templateId);
@@ -58,6 +62,7 @@ class NoteList {
 
     _onAddBtnClick() {
         const note = new Note();
+        note.setReadonly(this.readonly);
         this.add(note);
     }
 }

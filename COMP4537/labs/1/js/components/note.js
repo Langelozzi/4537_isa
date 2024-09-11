@@ -12,16 +12,23 @@ class Note {
         this.updateContent(this.content);
 
         this._registerDeleteButtonEventListener();
+        this._registerContentEventListener();
     }
 
     updateContent(content) {
         this.content = content;
-        this.contentElement.textContent = this.content;
+        this.contentElement.value = this.content;
     }
 
     setReadonly(readonly) {
-        this.contentElement.contentEditable = !readonly;
+        this.contentElement.disabled = readonly;
         this.deleteButtonElement.hidden = readonly;
+    }
+
+    toJSON() {
+        return {
+            content: this.content
+        };
     }
 
     _createNoteElement() {
@@ -36,7 +43,15 @@ class Note {
         this.deleteButtonElement.addEventListener("click", this._onDeleteBtnClick.bind(this));
     }
 
+    _registerContentEventListener() {
+        this.contentElement.addEventListener("input", this._onContentChange.bind(this));
+    }
+
     _onDeleteBtnClick() {
         this.element.remove();
+    }
+
+    _onContentChange() {
+        this.content = this.contentElement.value;
     }
 }
