@@ -13,14 +13,21 @@
 </head>
 
 <body>
-    <header class="p-4">
-        <h1 data-i18n="Labels.IndexTitle"></h1>
-        <h3 data-i18n="Labels.CourseNum"></h3>
-        <h3 data-i18n="Labels.IndexSignature"></h3>
-    </header>
-
     <div class="container">
-        <button class="btn">Button</button>
+        <header class="p-4">
+            <h1 data-i18n="Labels.IndexTitle"></h1>
+            <h3 data-i18n="Labels.CourseNum"></h3>
+            <h3 data-i18n="Labels.IndexSignature"></h3>
+        </header>
+
+        <div class="d-flex justify-content-center">
+            <a href="./reader.html">
+                <button type="button" class="btn btn-primary m-2" data-i18n="Labels.Reader"></button>
+            </a>
+            <a href="./writer.html">
+                <button class="btn btn-success m-2" data-i18n="Labels.Writer"></button>
+            </a>
+        </div>
     </div>
 
     <script src="./lang/messages/en/user.js"></script>
