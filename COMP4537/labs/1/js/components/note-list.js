@@ -32,13 +32,22 @@ class NoteList {
         this.notes.splice(index, 1);
     }
 
+    listenForContentChange(onContentChange) {
+        this.notes.forEach(note => {
+            note.listenForContentChange(onContentChange);
+        });
+    }
+
     toJSON() {
         return this.notes.map(note => note.toJSON());
     }
 
     fromJSON(json) {
         this.notes = json.map(note => {
-            return new Note(note.content, this._onDeleteNote.bind(this));
+            return new Note(
+                note.content,
+                this._onDeleteNote.bind(this)
+            );
         });
         this._displayNotes();
 

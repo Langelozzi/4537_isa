@@ -16,7 +16,6 @@ class Note {
         this.updateContent(this.content);
 
         this._registerDeleteButtonEventListener(onDelete);
-        this._registerContentEventListener();
     }
 
     updateContent(content) {
@@ -36,6 +35,10 @@ class Note {
         };
     }
 
+    listenForContentChange(onContentChange) {
+        this._registerContentEventListener(onContentChange);
+    }
+
     _createNoteElement() {
         const template = document.getElementById(this._TEMPLATE_ID);
         const clonedTemplate = template.content.cloneNode(true);
@@ -51,8 +54,11 @@ class Note {
         });
     }
 
-    _registerContentEventListener() {
-        this.contentElement.addEventListener(EventEnum.Input, this._onContentChange.bind(this));
+    _registerContentEventListener(onContentChange) {
+        this.contentElement.addEventListener(EventEnum.Input, () => {
+            onContentChange(this);
+            this._onContentChange();
+        });
     }
 
     _onDeleteBtnClick() {

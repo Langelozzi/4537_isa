@@ -1,1 +1,1 @@
-WriterInitializer.init();
+WriterManager.init();

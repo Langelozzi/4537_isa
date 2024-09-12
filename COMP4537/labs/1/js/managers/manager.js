@@ -1,4 +1,4 @@
-class Initializer {
+class Manager {
     static localizeText() {
         LocalizationHelper.localizeElements();
     }

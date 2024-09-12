@@ -1,17 +1,17 @@
-class WriterInitializer extends Initializer {
+class WriterManager extends Manager {
     static _NOTE_LIST_CONTAINER_ID = "noteListContainer";
 
     static init() {
-        WriterInitializer._addEventListeners();
+        WriterManager._addEventListeners();
     }
 
     static _addEventListeners() {
-        WriterInitializer._registerDocumentReadyListener();
-        WriterInitializer._listenForDomChanges();
+        WriterManager._registerDocumentReadyListener();
+        WriterManager._listenForDomChanges();
     }
 
     static _registerDocumentReadyListener() {
-        document.addEventListener(EventEnum.DOMContentLoaded, WriterInitializer._onDocumentReady);
+        document.addEventListener(EventEnum.DOMContentLoaded, WriterManager._onDocumentReady);
     }
 
     // This allows for the localization of text to be updated when new elements are added to the DOM
@@ -19,7 +19,7 @@ class WriterInitializer extends Initializer {
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
                 if (mutation.type === MutationTypeEnum.ChildElements) {
-                    WriterInitializer.localizeText();
+                    WriterManager.localizeText();
                 }
             }
         });
@@ -31,13 +31,13 @@ class WriterInitializer extends Initializer {
     }
 
     static _onDocumentReady() {
-        const noteList = WriterInitializer._renderNoteList();
+        const noteList = WriterManager._renderNoteList();
         const readWriteHelper = new ReadWriteHelper(noteList);
 
         readWriteHelper.loadStoredData();
         readWriteHelper.startWriteLoop();
 
-        WriterInitializer.localizeText();
+        WriterManager.localizeText();
     }
 
     static _renderNoteList() {

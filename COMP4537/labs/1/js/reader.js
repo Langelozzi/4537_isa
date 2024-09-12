@@ -1,1 +1,1 @@
-ReaderInitializer.init();
+ReaderManager.init();

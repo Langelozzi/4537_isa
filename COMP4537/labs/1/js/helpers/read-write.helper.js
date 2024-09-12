@@ -13,10 +13,15 @@ class ReadWriteHelper {
 
     // Public methods
     startWriteLoop() {
-        setInterval(() => {
+        // setInterval(() => {
+        //     this._saveNotes();
+        //     this._updateLastSaved();
+        // }, this._WRITE_INTERVAL_MS);
+
+        this.noteList.listenForContentChange(() => {
             this._saveNotes();
             this._updateLastSaved();
-        }, this._WRITE_INTERVAL_MS);
+        });
     }
 
     listenForWrite() {

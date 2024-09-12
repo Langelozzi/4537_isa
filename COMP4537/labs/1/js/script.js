@@ -1,1 +1,1 @@
-IndexInitializer.init();
+IndexManager.init();
