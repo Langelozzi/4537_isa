@@ -11,4 +11,7 @@ const Dictionary = {
         Reader: 'Reader',
         Writer: 'Writer',
     },
+    ErrorMessages: {
+        LocalizationNotFound: 'No localization found for key:'
+    }
 }

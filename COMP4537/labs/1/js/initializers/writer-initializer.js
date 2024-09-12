@@ -1,4 +1,6 @@
 class WriterInitializer extends Initializer {
+    static _NOTE_LIST_CONTAINER_ID = "noteListContainer";
+
     static init() {
         WriterInitializer._addEventListeners();
     }
@@ -9,14 +11,14 @@ class WriterInitializer extends Initializer {
     }
 
     static _registerDocumentReadyListener() {
-        document.addEventListener("DOMContentLoaded", WriterInitializer._onDocumentReady);
+        document.addEventListener(EventEnum.DOMContentLoaded, WriterInitializer._onDocumentReady);
     }
 
     // This allows for the localization of text to be updated when new elements are added to the DOM
     static _listenForDomChanges() {
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
-                if (mutation.type === "childList") {
+                if (mutation.type === MutationTypeEnum.ChildElements) {
                     WriterInitializer.localizeText();
                 }
             }
@@ -40,7 +42,7 @@ class WriterInitializer extends Initializer {
 
     static _renderNoteList() {
         const noteList = new NoteList();
-        const noteListContainer = document.getElementById("noteListContainer");
+        const noteListContainer = document.getElementById(this._NOTE_LIST_CONTAINER_ID);
         noteListContainer.appendChild(noteList.element);
 
         return noteList;

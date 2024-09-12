@@ -11,7 +11,8 @@ class LocalizationHelper {
             if (localizedString) {
                 element.textContent = localizedString;
             } else {
-                console.error(`No localization found for path: ${path}`);
+                const errorMsg = LocalizationHelper.getTranslation("ErrorMessages.LocalizationNotFound");
+                console.error(`${errorMsg} ${path}`);
             }
         });
     }

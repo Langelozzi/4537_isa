@@ -1,4 +1,6 @@
 class ReaderInitializer extends Initializer {
+    static _NOTE_LIST_CONTAINER_ID = "noteListContainer";
+
     static init() {
         ReaderInitializer._addEventListeners();
     }
@@ -8,7 +10,7 @@ class ReaderInitializer extends Initializer {
     }
 
     static _registerDocumentReadyListener() {
-        document.addEventListener("DOMContentLoaded", ReaderInitializer._onDocumentReady);
+        document.addEventListener(EventEnum.DOMContentLoaded, ReaderInitializer._onDocumentReady);
     }
 
     static _onDocumentReady() {
@@ -23,7 +25,7 @@ class ReaderInitializer extends Initializer {
 
     static _renderNoteList() {
         const noteList = new NoteList([], true);
-        const noteListContainer = document.getElementById("noteListContainer");
+        const noteListContainer = document.getElementById(ReaderInitializer._NOTE_LIST_CONTAINER_ID);
         noteListContainer.appendChild(noteList.element);
 
         return noteList;

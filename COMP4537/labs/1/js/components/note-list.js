@@ -1,7 +1,7 @@
 class NoteList {
-    _templateId = "noteListTemplate";
-    _noteContainerId = "notesContainer";
-    _addNoteBtnId = "addNoteBtn";
+    _TEMPLATE_ID = "noteListTemplate";
+    _NOTE_CONTAINER_ID = "notesContainer";
+    _ADD_NOTE_BTN_ID = "addNoteBtn";
 
     constructor(notes, readonly = false) {
         if (!notes) {
@@ -10,8 +10,8 @@ class NoteList {
         this.notes = notes;
         this.readonly = readonly;
         this.element = this._createNoteListElement();
-        this.noteContainerElement = this.element.querySelector(`#${this._noteContainerId}`);
-        this.addNoteButton = this.element.querySelector(`#${this._addNoteBtnId}`);
+        this.noteContainerElement = this.element.querySelector(`#${this._NOTE_CONTAINER_ID}`);
+        this.addNoteButton = this.element.querySelector(`#${this._ADD_NOTE_BTN_ID}`);
 
         this._displayNotes();
 
@@ -49,7 +49,7 @@ class NoteList {
 
     // Private methods
     _createNoteListElement() {
-        const template = document.getElementById(this._templateId);
+        const template = document.getElementById(this._TEMPLATE_ID);
         const noteList = template.content.cloneNode(true);
         return noteList;
     }
@@ -75,8 +75,8 @@ class NoteList {
     }
 
     _registerAddButtonEventListener() {
-        const addNoteButton = this.element.getElementById(this._addNoteBtnId);
-        addNoteButton.addEventListener("click", this._onAddBtnClick.bind(this));
+        const addNoteButton = this.element.getElementById(this._ADD_NOTE_BTN_ID);
+        addNoteButton.addEventListener(EventEnum.Click, this._onAddBtnClick.bind(this));
     }
 
     _onAddBtnClick() {

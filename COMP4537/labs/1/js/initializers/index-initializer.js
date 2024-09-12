@@ -8,7 +8,7 @@ class IndexInitializer extends Initializer {
     }
 
     static _registerDocumentReadyListener() {
-        document.addEventListener("DOMContentLoaded", IndexInitializer._onDocumentReady);
+        document.addEventListener(EventEnum.DOMContentLoaded, IndexInitializer._onDocumentReady);
     }
 
     static _onDocumentReady() {

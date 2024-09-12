@@ -1,0 +1,3 @@
+const MutationTypeEnum = {
+    ChildElements: "childList",
+}

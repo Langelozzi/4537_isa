@@ -1,14 +1,15 @@
 class Note {
-    _templateId = "noteTemplate";
-    _deleteButtonClass = "delete-note-btn";
-    _noteContentClass = "note-content";
+    _TEMPLATE_ID = "noteTemplate";
+    _DELETE_BTN_CLASS = "delete-note-btn";
+    _NOTE_CONTENT_CLASS = "note-content";
+    _NOTE_CARD_CLASS = "note-card";
 
     constructor(content = "", onDelete) {
         this.content = content;
         this.element = this._createNoteElement();
-        this.deleteButtonElement = this.element.querySelector(`.${this._deleteButtonClass}`);
+        this.deleteButtonElement = this.element.querySelector(`.${this._DELETE_BTN_CLASS}`);
 
-        this.contentElement = this.element.querySelector(`.${this._noteContentClass}`);
+        this.contentElement = this.element.querySelector(`.${this._NOTE_CONTENT_CLASS}`);
         this.contentElementPlaceholder = LocalizationHelper.getTranslation("Labels.NotePlaceholder");
         this.contentElement.placeholder = this.contentElementPlaceholder;
 
@@ -36,22 +37,22 @@ class Note {
     }
 
     _createNoteElement() {
-        const template = document.getElementById(this._templateId);
+        const template = document.getElementById(this._TEMPLATE_ID);
         const clonedTemplate = template.content.cloneNode(true);
 
         // Ensure that the note card is the first child of the cloned template
-        return clonedTemplate.querySelector(".note-card");
+        return clonedTemplate.querySelector(`.${this._NOTE_CARD_CLASS}`);
     }
 
     _registerDeleteButtonEventListener(onDelete) {
-        this.deleteButtonElement.addEventListener("click", () => {
+        this.deleteButtonElement.addEventListener(EventEnum.Click, () => {
             onDelete(this);
             this._onDeleteBtnClick();
         });
     }
 
     _registerContentEventListener() {
-        this.contentElement.addEventListener("input", this._onContentChange.bind(this));
+        this.contentElement.addEventListener(EventEnum.Input, this._onContentChange.bind(this));
     }
 
     _onDeleteBtnClick() {
