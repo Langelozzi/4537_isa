@@ -39,7 +39,7 @@ class ReadWriteHelper {
     }
 
     _loadNotes() {
-        this.noteList.fromJSON(LocalStorageHelper.getItem(this._NOTE_LIST_KEY));
+        this.noteList.fromJSON(LocalStorageHelper.getItem(this._NOTE_LIST_KEY) ?? []);
     }
 
     _loadLastSaved() {
