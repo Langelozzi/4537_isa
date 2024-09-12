@@ -7,7 +7,9 @@ class Note {
         this.content = content;
         this.element = this._createNoteElement();
         this.deleteButtonElement = this.element.querySelector(`.${this._deleteButtonClass}`);
+
         this.contentElement = this.element.querySelector(`.${this._noteContentClass}`);
+        this.contentElement.placeholder = LocalizationHelper.getTranslation("Labels.NotePlaceholder");
 
         this.updateContent(this.content);
 

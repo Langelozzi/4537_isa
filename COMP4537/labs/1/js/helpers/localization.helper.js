@@ -6,7 +6,7 @@ class LocalizationHelper {
         const elements = document.querySelectorAll(`[${this._localizationAttribute}]`);
         elements.forEach(element => {
             const path = element.getAttribute(this._localizationAttribute);
-            const localizedString = this.getLocalizedString(path);
+            const localizedString = this.getTranslation(path);
 
             if (localizedString) {
                 element.textContent = localizedString;
@@ -16,7 +16,7 @@ class LocalizationHelper {
         });
     }
 
-    static getLocalizedString(key) {
+    static getTranslation(key) {
         return key.split('.').reduce((obj, key) => obj && obj[key], Dictionary);
     }
 }
