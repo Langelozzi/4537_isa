@@ -14,7 +14,55 @@
 </head>
 
 <body>
+    <!-- Top Bar -->
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="./index.html">
+                <button class="btn btn-outline-secondary">&larr; Back</button>
+            </a>
+            <span>Last saved at: <strong id="saveTime">10:30 AM</strong></span>
+        </div>
+    </div>
 
+    <!-- Note List container -->
+    <div id="noteListContainer">
+        <!-- Note List will be added here dynamically -->
+    </div>
+
+    <!-- Note List Template -->
+    <template id="noteListTemplate">
+        <div class="container">
+            <div id="notesContainer">
+                <!-- Notes will be added here dynamically -->
+            </div>
+
+            <!-- Add Note Button -->
+            <div class="d-grid">
+                <button id="addNoteBtn" class="btn btn-primary">Add Note</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Note Template -->
+    <template id="noteTemplate">
+        <div class="card note-card">
+            <div class="card-body">
+                <textarea class="form-control mb-3 note-content" rows="3"
+                    placeholder="Enter your note here..."></textarea>
+                <button class="btn btn-danger delete-note-btn">Delete</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="./lang/messages/en/user.js"></script>
+    <script src="./js/components/note.js"></script>
+    <script src="./js/components/note-list.js"></script>
+    <script src="./js/helpers/localization.helper.js"></script>
+    <script src="./js/helpers/local-storage.helper.js"></script>
+    <script src="./js/helpers/read-write.helper.js"></script>
+    <script src="./js/initializers/initializer.js"></script>
+    <script src="./js/initializers/reader-initializer.js"></script>
+    <script src="./js/reader.js"></script>
 </body>
 
 </html>

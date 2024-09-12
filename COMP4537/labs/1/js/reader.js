@@ -1,3 +1,1 @@
-/*
-Manager class is meant to manage the UI of the reader page
-*/
+ReaderInitializer.init();

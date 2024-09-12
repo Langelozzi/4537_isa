@@ -1,6 +1,7 @@
 class NoteList {
     _templateId = "noteListTemplate";
     _noteContainerId = "notesContainer";
+    _addNoteBtnId = "addNoteBtn";
 
     constructor(notes, readonly = false) {
         if (!notes) {
@@ -10,11 +11,13 @@ class NoteList {
         this.readonly = readonly;
         this.element = this._createNoteListElement();
         this.noteContainerElement = this.element.querySelector(`#${this._noteContainerId}`);
+        this.addNoteButton = this.element.querySelector(`#${this._addNoteBtnId}`);
 
         this._displayNotes();
 
         if (this.readonly) {
             this._makeCardsReadOnly();
+            this.addNoteButton.hidden = true;
         }
 
         this._registerAddButtonEventListener();
@@ -38,6 +41,10 @@ class NoteList {
             return new Note(note.content, this._onDeleteNote.bind(this));
         });
         this._displayNotes();
+
+        if (this.readonly) {
+            this._makeCardsReadOnly();
+        }
     }
 
     // Private methods
@@ -68,7 +75,7 @@ class NoteList {
     }
 
     _registerAddButtonEventListener() {
-        const addNoteButton = this.element.querySelector("#addNoteBtn");
+        const addNoteButton = this.element.getElementById(this._addNoteBtnId);
         addNoteButton.addEventListener("click", this._onAddBtnClick.bind(this));
     }
 
