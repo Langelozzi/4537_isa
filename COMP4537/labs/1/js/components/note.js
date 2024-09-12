@@ -9,7 +9,8 @@ class Note {
         this.deleteButtonElement = this.element.querySelector(`.${this._deleteButtonClass}`);
 
         this.contentElement = this.element.querySelector(`.${this._noteContentClass}`);
-        this.contentElement.placeholder = LocalizationHelper.getTranslation("Labels.NotePlaceholder");
+        this.contentElementPlaceholder = LocalizationHelper.getTranslation("Labels.NotePlaceholder");
+        this.contentElement.placeholder = this.contentElementPlaceholder;
 
         this.updateContent(this.content);
 
@@ -25,6 +26,7 @@ class Note {
     setReadonly(readonly) {
         this.contentElement.disabled = readonly;
         this.deleteButtonElement.hidden = readonly;
+        this.contentElement.placeholder = readonly ? "" : this.contentElementPlaceholder;
     }
 
     toJSON() {
