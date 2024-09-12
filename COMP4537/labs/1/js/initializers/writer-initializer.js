@@ -18,7 +18,7 @@ class WriterInitializer extends Initializer {
         const readWriteHelper = new ReadWriteHelper(noteList);
 
         readWriteHelper.loadStoredData();
-        readWriteHelper.startSaveLoop();
+        readWriteHelper.startWriteLoop();
     }
 
     static _renderNoteList() {

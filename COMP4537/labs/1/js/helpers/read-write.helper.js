@@ -1,18 +1,24 @@
 class ReadWriteHelper {
     _noteListKey = 'noteList';
     _lastSaveKey = 'lastSave';
-    _saveIntervalMS = 2000;
+    _writeIntervalMS = 2000;
     _lastSaveElementId = 'saveTime';
 
     constructor(noteList) {
         this.noteList = noteList;
     }
 
-    startSaveLoop() {
+    startWriteLoop() {
         setInterval(() => {
             this._saveNotes();
             this._updateLastSaved();
-        }, this._saveIntervalMS);
+        }, this._writeIntervalMS);
+    }
+
+    listenForWrite() {
+        window.addEventListener('storage', () => {
+            this.loadStoredData();
+        });
     }
 
     loadStoredData() {
