@@ -6,6 +6,8 @@ class ReadWriteHelper {
 
     constructor(noteList) {
         this.noteList = noteList;
+
+        this.lastSavedElement = document.getElementById(this._lastSaveElementId);
     }
 
     startWriteLoop() {
@@ -38,11 +40,10 @@ class ReadWriteHelper {
     }
 
     _loadLastSaved() {
-        return LocalStorageHelper.getItem(this._lastSaveKey);
+        return LocalStorageHelper.getItem(this._lastSaveKey) ?? '';
     }
 
     _updateLastSaved() {
-        const lastSavedElement = document.getElementById(this._lastSaveElementId);
-        lastSavedElement.textContent = this._loadLastSaved();
+        this.lastSavedElement.innerHTML = this._loadLastSaved();
     }
 }

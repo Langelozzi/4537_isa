@@ -18,9 +18,11 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <a href="./index.html">
-                <button class="btn btn-outline-secondary">&larr; Back</button>
+                <button class="btn btn-outline-secondary" data-i18n="Labels.Back"></button>
             </a>
-            <span>Last saved at: <strong id="saveTime">10:30 AM</strong></span>
+            <span>
+                <span data-i18n="Labels.LastSavedAt"></span> <strong><span id="saveTime"></span></strong>
+            </span>
         </div>
     </div>
 
@@ -38,7 +40,7 @@
 
             <!-- Add Note Button -->
             <div class="d-grid">
-                <button id="addNoteBtn" class="btn btn-primary">Add Note</button>
+                <button id="addNoteBtn" class="btn btn-primary" data-i18n="Labels.AddNote"></button>
             </div>
         </div>
     </template>
@@ -49,7 +51,7 @@
             <div class="card-body">
                 <textarea class="form-control mb-3 note-content" rows="3"
                     placeholder="Enter your note here..."></textarea>
-                <button class="btn btn-danger delete-note-btn">Delete</button>
+                <button class="btn btn-danger delete-note-btn" data-i18n="Labels.Delete"></button>
             </div>
         </div>
     </template>

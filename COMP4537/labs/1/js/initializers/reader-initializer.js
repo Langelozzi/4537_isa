@@ -12,13 +12,13 @@ class ReaderInitializer extends Initializer {
     }
 
     static _onDocumentReady() {
-        ReaderInitializer.localizeText();
-
         const noteList = ReaderInitializer._renderNoteList();
         const readWriteHelper = new ReadWriteHelper(noteList);
 
         readWriteHelper.loadStoredData();
         readWriteHelper.listenForWrite();
+
+        ReaderInitializer.localizeText();
     }
 
     static _renderNoteList() {
