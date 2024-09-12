@@ -33,6 +33,13 @@ class NoteList {
         return this.notes.map(note => note.toJSON());
     }
 
+    fromJSON(json) {
+        this.notes = json.map(note => {
+            return new Note(note.content, this._onDeleteNote.bind(this));
+        });
+        this._displayNotes();
+    }
+
     // Private methods
     _createNoteListElement() {
         const template = document.getElementById(this._templateId);
@@ -55,14 +62,20 @@ class NoteList {
         });
     }
 
+    _onDeleteNote(note) {
+        const index = this.notes.indexOf(note);
+        this.remove(index);
+    }
+
     _registerAddButtonEventListener() {
         const addNoteButton = this.element.querySelector("#addNoteBtn");
         addNoteButton.addEventListener("click", this._onAddBtnClick.bind(this));
     }
 
     _onAddBtnClick() {
-        const note = new Note();
+        const note = new Note('', this._onDeleteNote.bind(this));
         note.setReadonly(this.readonly);
         this.add(note);
     }
+
 }

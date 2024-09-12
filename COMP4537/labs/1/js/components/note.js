@@ -3,7 +3,7 @@ class Note {
     _deleteButtonClass = "delete-note-btn";
     _noteContentClass = "note-content";
 
-    constructor(content = "") {
+    constructor(content = "", onDelete) {
         this.content = content;
         this.element = this._createNoteElement();
         this.deleteButtonElement = this.element.querySelector(`.${this._deleteButtonClass}`);
@@ -11,7 +11,7 @@ class Note {
 
         this.updateContent(this.content);
 
-        this._registerDeleteButtonEventListener();
+        this._registerDeleteButtonEventListener(onDelete);
         this._registerContentEventListener();
     }
 
@@ -39,8 +39,11 @@ class Note {
         return clonedTemplate.querySelector(".note-card");
     }
 
-    _registerDeleteButtonEventListener() {
-        this.deleteButtonElement.addEventListener("click", this._onDeleteBtnClick.bind(this));
+    _registerDeleteButtonEventListener(onDelete) {
+        this.deleteButtonElement.addEventListener("click", () => {
+            onDelete(this);
+            this._onDeleteBtnClick();
+        });
     }
 
     _registerContentEventListener() {
