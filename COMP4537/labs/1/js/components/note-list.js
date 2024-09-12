@@ -44,10 +44,7 @@ class NoteList {
 
     fromJSON(json) {
         this.notes = json.map(note => {
-            return new Note(
-                note.content,
-                this._onDeleteNote.bind(this)
-            );
+            return this._createNote(note.content);
         });
         this._displayNotes();
 
@@ -78,20 +75,31 @@ class NoteList {
         });
     }
 
+    _onAddNote() {
+        const note = this._createNote();
+        this.add(note);
+        ReadWriteHelper.writeNotes(this.toJSON());
+    }
+
     _onDeleteNote(note) {
         const index = this.notes.indexOf(note);
         this.remove(index);
+        ReadWriteHelper.writeNotes(this.toJSON());
+    }
+
+    _onChangeNoteContent() {
+        ReadWriteHelper.writeNotes(this.toJSON());
     }
 
     _registerAddButtonEventListener() {
         const addNoteButton = this.element.getElementById(this._ADD_NOTE_BTN_ID);
-        addNoteButton.addEventListener(EventEnum.Click, this._onAddBtnClick.bind(this));
+        addNoteButton.addEventListener(EventEnum.Click, this._onAddNote.bind(this));
     }
 
-    _onAddBtnClick() {
-        const note = new Note('', this._onDeleteNote.bind(this));
+    _createNote(content = '') {
+        const note = new Note(content, this._onDeleteNote.bind(this));
         note.setReadonly(this.readonly);
-        this.add(note);
+        note.listenForContentChange(this._onChangeNoteContent.bind(this));
+        return note
     }
-
 }

@@ -1,57 +1,42 @@
 class ReadWriteHelper {
     // Private constant fields
-    _NOTE_LIST_KEY = 'noteList';
-    _LAST_SAVE_KEY = 'lastSave';
-    _WRITE_INTERVAL_MS = 2000;
-    _LAST_SAVE_ELEMENT_ID = 'saveTime';
-
-    constructor(noteList) {
-        this.noteList = noteList;
-
-        this.lastSavedElement = document.getElementById(this._LAST_SAVE_ELEMENT_ID);
-    }
+    static _NOTE_LIST_KEY = 'noteList';
+    static _LAST_SAVE_KEY = 'lastSave';
+    static _WRITE_INTERVAL_MS = 2000;
+    static _LAST_SAVE_ELEMENT_ID = 'saveTime';
 
     // Public methods
-    startWriteLoop() {
-        // setInterval(() => {
-        //     this._saveNotes();
-        //     this._updateLastSaved();
-        // }, this._WRITE_INTERVAL_MS);
-
-        this.noteList.listenForContentChange(() => {
-            this._saveNotes();
-            this._updateLastSaved();
-        });
+    static listenForStorageChanges(onChange) {
+        window.addEventListener(EventEnum.Storage, onChange);
     }
 
-    listenForWrite() {
-        window.addEventListener(EventEnum.Storage, () => {
-            this.loadStoredData();
-        });
+    static readNotes() {
+        ReadWriteHelper._updateLastSaved();
+        return ReadWriteHelper._loadNotes();
     }
 
-    loadStoredData() {
-        this._loadNotes();
-        this._updateLastSaved();
+    static writeNotes(notes) {
+        ReadWriteHelper._saveNotes(notes);
+        ReadWriteHelper._updateLastSaved();
     }
 
     // Private methods
-    _saveNotes() {
-        LocalStorageHelper.setItem(this._NOTE_LIST_KEY, this.noteList.toJSON());
+    static _saveNotes(notes) {
+        LocalStorageHelper.setItem(ReadWriteHelper._NOTE_LIST_KEY, notes);
 
         const lastSave = new Date().toLocaleTimeString();
-        LocalStorageHelper.setItem(this._LAST_SAVE_KEY, lastSave);
+        LocalStorageHelper.setItem(ReadWriteHelper._LAST_SAVE_KEY, lastSave);
     }
 
-    _loadNotes() {
-        this.noteList.fromJSON(LocalStorageHelper.getItem(this._NOTE_LIST_KEY) ?? []);
+    static _loadNotes() {
+        return LocalStorageHelper.getItem(ReadWriteHelper._NOTE_LIST_KEY) ?? [];
     }
 
-    _loadLastSaved() {
-        return LocalStorageHelper.getItem(this._LAST_SAVE_KEY) ?? '';
+    static _loadLastSaved() {
+        return LocalStorageHelper.getItem(ReadWriteHelper._LAST_SAVE_KEY) ?? '';
     }
 
-    _updateLastSaved() {
-        this.lastSavedElement.innerHTML = this._loadLastSaved();
+    static _updateLastSaved() {
+        document.getElementById(ReadWriteHelper._LAST_SAVE_ELEMENT_ID).innerHTML = ReadWriteHelper._loadLastSaved();
     }
 }

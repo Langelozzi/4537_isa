@@ -15,10 +15,13 @@ class ReaderManager extends Manager {
 
     static _onDocumentReady() {
         const noteList = ReaderManager._renderNoteList();
-        const readWriteHelper = new ReadWriteHelper(noteList);
+        const notes = ReadWriteHelper.readNotes();
+        noteList.fromJSON(notes);
 
-        readWriteHelper.loadStoredData();
-        readWriteHelper.listenForWrite();
+        ReadWriteHelper.listenForStorageChanges(() => {
+            const notes = ReadWriteHelper.readNotes();
+            noteList.fromJSON(notes);
+        });
 
         ReaderManager.localizeText();
     }

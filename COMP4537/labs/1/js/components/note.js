@@ -56,8 +56,8 @@ class Note {
 
     _registerContentEventListener(onContentChange) {
         this.contentElement.addEventListener(EventEnum.Input, () => {
-            onContentChange(this);
             this._onContentChange();
+            onContentChange(this);
         });
     }
 

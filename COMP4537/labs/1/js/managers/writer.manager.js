@@ -32,10 +32,9 @@ class WriterManager extends Manager {
 
     static _onDocumentReady() {
         const noteList = WriterManager._renderNoteList();
-        const readWriteHelper = new ReadWriteHelper(noteList);
+        const notes = ReadWriteHelper.readNotes();
 
-        readWriteHelper.loadStoredData();
-        readWriteHelper.startWriteLoop();
+        noteList.fromJSON(notes);
 
         WriterManager.localizeText();
     }
