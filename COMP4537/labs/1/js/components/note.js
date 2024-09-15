@@ -49,6 +49,7 @@ class Note {
 
     _registerDeleteButtonEventListener(onDelete) {
         this.deleteButtonElement.addEventListener(EventEnum.Click, () => {
+            // Make sure that any provided function is called before the note is removed from the DOM
             onDelete(this);
             this._onDeleteBtnClick();
         });
@@ -56,6 +57,7 @@ class Note {
 
     _registerContentEventListener(onContentChange) {
         this.contentElement.addEventListener(EventEnum.Input, () => {
+            // Make sure the note's content is updated before calling the provided function
             this._onContentChange();
             onContentChange(this);
         });

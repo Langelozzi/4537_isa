@@ -18,6 +18,7 @@ class LocalizationHelper {
     }
 
     static getTranslation(key) {
+        // Starts at the Dictionary level and drills down to the desired key until obj is the value of the key
         return key.split('.').reduce((obj, key) => obj && obj[key], Dictionary);
     }
 }
