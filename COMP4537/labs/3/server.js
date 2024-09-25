@@ -1,6 +1,7 @@
 const Utils = require('./modules/utils');
 const HttpServer = require('./modules/http-server');
 const fs = require('fs');
+const path = require('path');
 
 class Server {
     static start() {
@@ -24,9 +25,11 @@ class Server {
                 text = `\n${text}`;
             }
 
+            res.setHeader('Content-Type', 'text/plain');
+
             fs.appendFile(filePath, text, (err) => {
                 if (err) {
-                    res.status(500).send(`Error writting to ${filePath}`);
+                    res.status(500).send(`Error writting to file: ${filePath}.\n\n ${err}`);
                 } else {
                     res.status(200).send(`File contents written successfully to ${filePath}`);
                 }
@@ -34,7 +37,18 @@ class Server {
         })
 
         server.get('/readFile/:fileName', (req, res) => {
-            console.log(req);
+            const fileName = req.urlParams.fileName;
+            const filePath = path.join(__dirname, fileName);
+
+            res.setHeader('Content-Type', 'text/plain');
+
+            fs.readFile(filePath, 'utf-8', (err, data) => {
+                if (err) {
+                    res.status(404).send(`404 Not Found - Unable to locate file: ${fileName}.\n\n ${err}`)
+                } else {
+                    res.status(200).send(data);
+                }
+            })
         })
 
         server.listen(server.DEFAULT_PORT, () => {

@@ -34,6 +34,7 @@ class Response {
         fs.readFile(filePath, (err, data) => {
             if (err) {
                 // Handle file read error
+                this.setHeader('Content-Type', 'text/plain');
                 this.status(500).send('500 - Internal Server Error');
             } else {
                 this.setHeader('Content-Type', 'text/html');
