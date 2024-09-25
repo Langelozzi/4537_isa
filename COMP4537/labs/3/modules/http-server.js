@@ -4,7 +4,7 @@ const Request = require('../models/request');
 const Response = require('../models/response');
 
 class HttpServer {
-    DEFAULT_PORT = 8080;
+    DEFAULT_PORT = 3000;
 
     constructor() {
         this.routes = {};
