@@ -52,15 +52,16 @@ class HttpServer {
         const parsedUrl = url.parse(req.url, true);
         const route = this._matchRoute(parsedUrl.pathname);
 
-        if (!route) {
-            return null;
-        }
-
         // Get the query params
         const queryParams = parsedUrl.query;
 
         // Get the url params
-        const urlParams = this._parseUrlParams(route.endpoint, parsedUrl.pathname);
+        let urlParams;
+        if (!route) {
+            urlParams = null;
+        } else {
+            urlParams = this._parseUrlParams(route.endpoint, parsedUrl.pathname);
+        }
 
         return new Request(req.method, req.url, route, req.headers, queryParams, urlParams);
     }
