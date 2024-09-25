@@ -30,6 +30,7 @@ class HttpServer {
 
             if (!request) {
                 response.status(404).send('Endpoint not found');
+                this._logRequest(request, response);
                 return;
             }
 
