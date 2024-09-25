@@ -33,6 +33,10 @@ class Server {
             })
         })
 
+        server.get('/readFile/:fileName', (req, res) => {
+            console.log(req);
+        })
+
         server.listen(server.DEFAULT_PORT, () => {
             console.log(`Server listening on port ${server.DEFAULT_PORT}`);
         });
