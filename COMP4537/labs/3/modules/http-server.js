@@ -40,6 +40,9 @@ class HttpServer {
             } else {
                 response.status(404).send('Endpoint not found');
             }
+
+            // Log the request information for debugging
+            this._logRequest(request, response);
         });
     }
 
@@ -59,6 +62,15 @@ class HttpServer {
         const urlParams = this._parseUrlParams(route.endpoint, parsedUrl.pathname);
 
         return new Request(req.method, req.url, route, req.headers, queryParams, urlParams);
+    }
+
+    _logRequest(request, response) {
+        const timestamp = new Date().toISOString();
+        const method = request.method;
+        const url = request.url;
+        const statusCode = response.statusCode;
+
+        console.log(`[${timestamp}] ${method} ${url} - ${statusCode}`);
     }
 
     _matchRoute(actualUrl) {
