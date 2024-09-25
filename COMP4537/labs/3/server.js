@@ -1,5 +1,6 @@
 const Utils = require('./modules/utils');
 const HttpServer = require('./modules/http-server');
+const LocalizationHelper = require('./helpers/localization.helper');
 const fs = require('fs');
 const path = require('path');
 
@@ -8,9 +9,12 @@ class Server {
         const server = new HttpServer();
 
         server.get('/getDate', (req, res) => {
+            const name = req.queryParams.name ?? '';
+            const message = LocalizationHelper.getTranslation('Messages.GetDate', [name, Utils.getDate()]);
+
             res.status(200).send(`
                 <span style="color: blue;">
-                    Hello ${req.queryParams.name}, what a beautiful day. Server current date and time is ${Utils.getDate()}
+                    ${message}
                 </span>
             `)
         })
@@ -29,9 +33,9 @@ class Server {
 
             fs.appendFile(filePath, text, (err) => {
                 if (err) {
-                    res.status(500).send(`Error writting to file: ${filePath}.\n\n${err}`);
+                    res.status(500).send(LocalizationHelper.getTranslation('ErrorMessages.ErrorWritingFile', [filePath, err]));
                 } else {
-                    res.status(200).send(`File contents written successfully to ${filePath}`);
+                    res.status(200).send(LocalizationHelper.getTranslation('Messages.FileWritten', [filePath]));
                 }
             })
         })
@@ -44,7 +48,7 @@ class Server {
 
             fs.readFile(filePath, 'utf-8', (err, data) => {
                 if (err) {
-                    res.status(404).send(`404 Not Found - Unable to locate file: ${fileName}.\n\n${err}`)
+                    res.status(404).send(LocalizationHelper.getTranslation('ErrorMessages.FileNotFound', [fileName, err]));
                 } else {
                     res.status(200).send(data);
                 }

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Logger = require('../modules/logger');
+const LocalizationHelper = require('../helpers/localization.helper');
 
 class Response {
     constructor(req, res) {
@@ -39,7 +40,7 @@ class Response {
             if (err) {
                 // Handle file read error
                 this.setHeader('Content-Type', 'text/plain');
-                this.status(500).send('500 - Internal Server Error');
+                this.status(500).send(LocalizationHelper.getTranslation('ErrorMessage.500'));
             } else {
                 this.setHeader('Content-Type', 'text/html');
                 this.send(data);
