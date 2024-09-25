@@ -29,7 +29,7 @@ class HttpServer {
             const response = new Response(res);
 
             if (!request) {
-                response.status(404).html('Endpoint not found');
+                response.status(404).send('Endpoint not found');
                 return;
             }
 
@@ -38,7 +38,7 @@ class HttpServer {
             if (route && req.method === route.method) {
                 route.callback(request, response);
             } else {
-                response.status(404).html('Endpoint not found');
+                response.status(404).send('Endpoint not found');
             }
         });
     }
