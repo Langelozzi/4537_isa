@@ -1,35 +1,23 @@
-const http = require('http');
-const url = require('url');
-const utils = require('./modules/utils');
+const Utils = require('./modules/utils');
+const Server = require('./modules/server');
 const httpEnums = require('./enums/http-enums');
 
-const PORT = 8080;
+class App {
+    static run() {
+        const server = new Server();
 
-const server = http.createServer(function (req, res) {
-    const queryString = url.parse(req.url, true);
-    const qParams = queryString.query;
-    console.log(qParams);
+        server.get('/getDate', (req, res) => {
+            res.status(httpEnums.HTTPStatusCodes.Ok).send(`
+                <span style="color: blue;">
+                    Hello ${req.queryParams.name}, what a beautiful day. Server current date and time is ${Utils.getDate()}
+                </span>
+            `)
+        })
 
-    if (req.method === httpEnums.HTTPMethods.GET && queryString.pathname === '/getDate') {
-        res.writeHead(httpEnums.HTTPStatusCodes.Ok, {
-            'Content-Type': 'text/html',
-            'Access-Control-Allow-Origin': '*'
+        server.listen(server.DEFAULT_PORT, () => {
+            console.log(`Server listening on port ${server.DEFAULT_PORT}`);
         });
-
-        res.end(`
-            <span style="color: blue;">
-                Hello ${qParams.name}, what a beautiful day. Server current date and time is ${utils.Utils.getDate()}
-            </span>
-        `)
-    } else {
-        res.writeHead(httpEnums.HTTPStatusCodes.NotFound, {
-            'Content-Type': 'text/plain',
-            'Access-Control-Allow-Origin': '*'
-        });
-
-        res.end('Endpoint not found');
     }
-});
+}
 
-server.listen(PORT);
-console.log(`Server is listening on port ${PORT}`);
+App.run();
