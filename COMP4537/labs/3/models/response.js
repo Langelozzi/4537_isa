@@ -43,8 +43,9 @@ class Response {
     }
 
     json(json) {
-        this.setHeader('Content-Type', 'application/json');
         const jsonStr = JSON.stringify(json);
+
+        this.setHeader('Content-Type', 'application/json');
 
         this._writeHeadersAndStatus();
         this.rawRes.end(jsonStr);

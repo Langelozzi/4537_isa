@@ -3,7 +3,7 @@ const url = require('url');
 const Request = require('../models/request');
 const Response = require('../models/response');
 
-class Server {
+class HttpServer {
     DEFAULT_PORT = 8080;
 
     constructor() {
@@ -34,7 +34,7 @@ class Server {
             } else {
                 response.status(404).send('Endpoint not found');
             }
-        })
+        });
     }
 
     _parseRequest(req) {
@@ -49,4 +49,4 @@ class Server {
     }
 }
 
-module.exports = Server;
+module.exports = HttpServer;

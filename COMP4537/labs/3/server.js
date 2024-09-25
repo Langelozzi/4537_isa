@@ -1,10 +1,9 @@
 const Utils = require('./modules/utils');
-const Server = require('./modules/server');
-const path = require('path');
+const HttpServer = require('./modules/http-server');
 
 class App {
     static run() {
-        const server = new Server();
+        const server = new HttpServer();
 
         server.get('/getDate', (req, res) => {
             res.status(200).send(`
