@@ -26,13 +26,7 @@ class HttpServer {
     _createServer() {
         return http.createServer((req, res) => {
             const request = this._parseRequest(req);
-            const response = new Response(res);
-
-            if (!request) {
-                response.status(404).send('Endpoint not found');
-                this._logRequest(request, response);
-                return;
-            }
+            const response = new Response(request, res);
 
             const route = request.route;
 
@@ -41,9 +35,6 @@ class HttpServer {
             } else {
                 response.status(404).send('Endpoint not found');
             }
-
-            // Log the request information for debugging
-            this._logRequest(request, response);
         });
     }
 
@@ -64,15 +55,6 @@ class HttpServer {
         }
 
         return new Request(req.method, req.url, route, req.headers, queryParams, urlParams);
-    }
-
-    _logRequest(request, response) {
-        const timestamp = new Date().toISOString();
-        const method = request.method;
-        const url = request.url;
-        const statusCode = response.statusCode;
-
-        console.log(`[${timestamp}] ${method} ${url} - ${statusCode}`);
     }
 
     _matchRoute(actualUrl) {

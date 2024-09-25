@@ -29,7 +29,7 @@ class Server {
 
             fs.appendFile(filePath, text, (err) => {
                 if (err) {
-                    res.status(500).send(`Error writting to file: ${filePath}.\n\n ${err}`);
+                    res.status(500).send(`Error writting to file: ${filePath}.\n\n${err}`);
                 } else {
                     res.status(200).send(`File contents written successfully to ${filePath}`);
                 }
@@ -44,7 +44,7 @@ class Server {
 
             fs.readFile(filePath, 'utf-8', (err, data) => {
                 if (err) {
-                    res.status(404).send(`404 Not Found - Unable to locate file: ${fileName}.\n\n ${err}`)
+                    res.status(404).send(`404 Not Found - Unable to locate file: ${fileName}.\n\n${err}`)
                 } else {
                     res.status(200).send(data);
                 }

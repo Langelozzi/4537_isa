@@ -1,8 +1,10 @@
 const fs = require('fs');
+const Logger = require('../modules/logger');
 
 class Response {
-    constructor(httpOutgoingMessage) {
-        this.rawRes = httpOutgoingMessage;
+    constructor(req, res) {
+        this.req = req;
+        this.rawRes = res;
         this.headers = {};
         this.statusCode = 200;
     }
@@ -26,7 +28,9 @@ class Response {
         }
 
         this._writeHeadersAndStatus();
-        this.rawRes.end(str);
+        this.rawRes.end(str, () => {
+            Logger.log(this.req, this);
+        });
     }
 
     sendFile(filePath) {
@@ -49,7 +53,9 @@ class Response {
         this.setHeader('Content-Type', 'application/json');
 
         this._writeHeadersAndStatus();
-        this.rawRes.end(jsonStr);
+        this.rawRes.end(jsonStr, () => {
+            Logger.log(this.req, this);
+        });
     }
 
     _writeHeadersAndStatus() {
