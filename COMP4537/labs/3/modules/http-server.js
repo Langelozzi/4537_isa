@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const Request = require('../models/request');
 const Response = require('../models/response');
+const LocalizationHelper = require('../helpers/localization.helper');
 
 class HttpServer {
     DEFAULT_PORT = 3000;
@@ -33,7 +34,7 @@ class HttpServer {
             if (route && req.method === route.method) {
                 route.callback(request, response);
             } else {
-                response.status(404).send('Endpoint not found');
+                response.status(404).send(LocalizationHelper.getTranslation('ErrorMessages.EndpointNotFound'));
             }
         });
     }

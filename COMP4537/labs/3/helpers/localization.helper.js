@@ -26,6 +26,10 @@ class LocalizationHelper {
             return null;
         }
 
+        if (!args) {
+            return templateStr;
+        }
+
         // Replace placeholders with corresponding values from args array
         return templateStr.replace(/%\d+/g, match => {
             const index = parseInt(match.slice(1), 10);

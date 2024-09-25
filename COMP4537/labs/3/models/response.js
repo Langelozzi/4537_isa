@@ -40,7 +40,7 @@ class Response {
             if (err) {
                 // Handle file read error
                 this.setHeader('Content-Type', 'text/plain');
-                this.status(500).send(LocalizationHelper.getTranslation('ErrorMessage.500'));
+                this.status(500).send(LocalizationHelper.getTranslation('ErrorMessages.500'));
             } else {
                 this.setHeader('Content-Type', 'text/html');
                 this.send(data);
