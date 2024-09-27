@@ -11,6 +11,7 @@ class HttpServer {
         this.routes = {};
     }
 
+    // Public Methods
     get(endpoint, callback) {
         this.routes[endpoint] = {
             endpoint: endpoint,
@@ -24,8 +25,10 @@ class HttpServer {
         server.listen(port, callback);
     }
 
+    // Private methods
     _createServer() {
         return http.createServer((req, res) => {
+            // Wrap the raw incoming and outgoing messages in custom Request and Response objects
             const request = this._parseRequest(req);
             const response = new Response(request, res);
 
