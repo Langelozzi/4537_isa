@@ -60,6 +60,7 @@ class Response {
     }
 
     _writeHeadersAndStatus() {
+	this.headers["Access-Control-Allow-Origin"] = "*";
         this.rawRes.writeHead(this.statusCode, this.headers);
     }
 }
