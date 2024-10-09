@@ -10,6 +10,7 @@ class Response {
         this.statusCode = 200;
     }
 
+    // Public methods
     setHeaders(headers) {
         this.headers = headers;
     }
@@ -59,6 +60,7 @@ class Response {
         });
     }
 
+    // Private methods
     _writeHeadersAndStatus() {
 	this.headers["Access-Control-Allow-Origin"] = "*";
         this.rawRes.writeHead(this.statusCode, this.headers);
