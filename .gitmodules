@@ -1,3 +1,6 @@
 [submodule "COMP4537/labs/4/comp4537-lab-4-lucas-cameron"]
 	path = COMP4537/labs/4/comp4537-lab-4-lucas-cameron
 	url = https://github.com/Langelozzi/comp4537-lab-4-lucas-cameron.git
+[submodule "COMP4537/labs/5/isa-lab5"]
+	path = COMP4537/labs/5/isa-lab5
+	url = https://github.com/camfung/isa-lab5.git
