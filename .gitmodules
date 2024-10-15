@@ -4,3 +4,6 @@
 [submodule "COMP4537/labs/5/isa-lab5"]
 	path = COMP4537/labs/5/isa-lab5
 	url = https://github.com/camfung/isa-lab5.git
+[submodule "COMP4537/project/stream-buster"]
+	path = COMP4537/project/stream-buster
+	url = https://github.com/Langelozzi/stream-buster.git
