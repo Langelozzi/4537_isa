@@ -7,3 +7,6 @@
 [submodule "COMP4537/project/stream-buster"]
 	path = COMP4537/project/stream-buster
 	url = https://github.com/Langelozzi/stream-buster.git
+[submodule "COMP4537/project/stream-buster-model"]
+	path = COMP4537/project/stream-buster-model
+	url = https://github.com/camfung/stream-buster-model.git
